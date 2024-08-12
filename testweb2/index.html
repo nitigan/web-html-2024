@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+        }
+        header, footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+        }
+        .container {
+            display: flex;
+            flex: 1;
+        }
+        aside {
+            width: 200px;
+            background-color: #f4f4f4;
+            padding: 10px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+        article {
+            flex: 1;
+            padding: 10px;
+        }
+        aside a {
+            display: block;
+            padding: 10px;
+            color: #333;
+            text-decoration: none;
+            margin-bottom: 5px;
+            background-color: #e0e0e0;
+        }
+        aside a:hover {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>My Website</h1>
+    </header>
+    <div class="container">
+        <aside>
+            <a href="#" onclick="loadPage('page1.html')">Page 1</a>
+            <a href="#" onclick="loadPage('page2.html')">Page 2</a>
+            <a href="#" onclick="loadPage('page3.html')">Page 3</a>
+        </aside>
+        <article id="content">
+            <!-- Content from page1.html will be loaded here -->
+        </article>
+    </div>
+    <footer>
+        <p>Footer content &copy; 2024</p>
+    </footer>
+
+    <script>
+        function loadPage(page) {
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', page, true);
+            xhr.onload = function () {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    document.getElementById('content').innerHTML = xhr.responseText;
+                } else {
+                    document.getElementById('content').innerHTML = 'Error loading page.';
+                }
+            };
+            xhr.send();
+        }
+
+        // Load default page (page1.html) on initial load
+        loadPage('page1.html');
+    </script>
+</body>
+</html>
